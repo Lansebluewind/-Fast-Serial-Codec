@@ -13,7 +13,6 @@
 ## 快速上手
 将 `myserial.h` 和 `myserial.cpp` 添加到您的项目中即可开始使用。
 ### 示例 1: 基本收发,此示例演示了如何打开串口，发送数据，并从内置的环形缓冲区中读取返回的数据。
-     // 示例1：使用环形缓冲区读取数据
     void example_usage1()
     {
     	MySerial serial;
@@ -48,7 +47,6 @@
     	}
     }
 ### 示例2：直接读取串口数据，绕过环形缓冲区
-
     void example_usage2()
     {
     	MySerial serial;
@@ -77,7 +75,7 @@
     		Sleep(100); // 可根据实际情况调整延时
     	}
     }
-### 示例3：使用用户自定义环形缓冲区读取数据,在接收串口数据的同时，自动将8字节数据拼接在一起，存入用户自定义环形队列中。
+### 示例3：使用`RingBuffer<int64_t> userBuffer`,和`serial.setDataProcessFunc`，在接收串口数据的同时，自动将8字节数据拼接在一起，存入用户环形队列中。
     void example_usage3()
     {
     	MySerial serial;
