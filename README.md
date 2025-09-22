@@ -1,8 +1,8 @@
-## fast-Serial-Codec* 是一个为 Windows 平台设计的高性能、现代化 C++ 异步串口通信库。它基于 Windows Overlapped I/O，通过多线程和回调机制，实现了高效的数据接收与灵活的数据处理（解码），是需要高速、稳定串口通信项目的理想选择。
+**fast-Serial-Codec** 是一个为 Windows 平台设计的高性能、现代化 C++ 异步串口通信库。它基于 Windows Overlapped I/O，通过多线程和回调机制，实现了高效的数据接收与灵活的数据处理（解码），是需要高速、稳定串口通信项目的理想选择。
 ## 核心功能
 - **高性能异步 I/O**：基于 Windows `OVERLAPPED` I/O 模型，实现非阻塞的数据收发，最大限度地减少 CPU 等待时间。
 - **多线程数据接收**：独立的后台线程专门负责数据接收，确保主线程不会被 I/O 操作阻塞。
-- **内置环形缓冲区**：自带线程安全的环形缓冲区（Ring Buffer），有效处理高速数据流，防止数据丢失。
+- **内置环形缓冲区**：自带线程安全的环形缓冲区（Ring Buffer），支持各种类型数据快速批量存储和读取，有效处理高速数据流，防止数据丢失。
 - **灵活的数据处理/解码**：支持通过 `std::function` 注册自定义回调函数，让用户可以方便地实现自己的数据协议解析和解码逻辑，真正做到“即收即解”。
 - **现代 C++ 设计**：采用 C++14 标准，利用 `std::thread`、`std::unique_ptr` 等特性，保证了代码的健壮性、异常安全性和易维护性。
 - **简洁易用的 API**：提供清晰的 `open`, `close`, `send`, `readData` 等接口，易于集成和使用。
@@ -140,4 +140,5 @@
 - `bool setBufferSize(int size)`: 设置串口驱动程序的内部缓冲区大小。
 - `void setReadTimeout(DWORD timeout)`: 设置读取操作的超时时间（毫秒）。
 - `void setWriteTimeout(DWORD timeout)`: 设置写入操作的超时时间（毫秒）。
-欢迎提交 Pull Request 或创建 Issue 来改进项目！
+
+## 欢迎提交 Pull Request 或创建 Issue 来改进项目！
