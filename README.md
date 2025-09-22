@@ -1,19 +1,18 @@
-**Fast-Serial-Codec* 是一个为 Windows 平台设计的高性能、现代化 C++ 异步串口通信库。它基于 Windows Overlapped I/O，通过多线程和回调机制，实现了高效的数据接收与灵活的数据处理（解码），是需要高速、稳定串口通信项目的理想选择。
+## fast-Serial-Codec* 是一个为 Windows 平台设计的高性能、现代化 C++ 异步串口通信库。它基于 Windows Overlapped I/O，通过多线程和回调机制，实现了高效的数据接收与灵活的数据处理（解码），是需要高速、稳定串口通信项目的理想选择。
 ## 核心功能
-    - **高性能异步 I/O**：基于 Windows `OVERLAPPED` I/O 模型，实现非阻塞的数据收发，最大限度地减少 CPU 等待时间。
-    - **多线程数据接收**：独立的后台线程专门负责数据接收，确保主线程不会被 I/O 操作阻塞。
-    - **内置环形缓冲区**：自带线程安全的环形缓冲区（Ring Buffer），有效处理高速数据流，防止数据丢失。
-    - **灵活的数据处理/解码**：支持通过 `std::function` 注册自定义回调函数，让用户可以方便地实现自己的数据协议解析和解码逻辑，真正做到“即收即解”。
-    - **现代 C++ 设计**：采用 C++14 标准，利用 `std::thread`、`std::unique_ptr` 等特性，保证了代码的健壮性、异常安全性和易维护性。
-    - **简洁易用的 API**：提供清晰的 `open`, `close`, `send`, `readData` 等接口，易于集成和使用。
-    - **高度可配置**：支持自定义串口号、波特率、校验位、数据位、停止位、超时时间以及收发缓冲区大小。
+- **高性能异步 I/O**：基于 Windows `OVERLAPPED` I/O 模型，实现非阻塞的数据收发，最大限度地减少 CPU 等待时间。
+- **多线程数据接收**：独立的后台线程专门负责数据接收，确保主线程不会被 I/O 操作阻塞。
+- **内置环形缓冲区**：自带线程安全的环形缓冲区（Ring Buffer），有效处理高速数据流，防止数据丢失。
+- **灵活的数据处理/解码**：支持通过 `std::function` 注册自定义回调函数，让用户可以方便地实现自己的数据协议解析和解码逻辑，真正做到“即收即解”。
+- **现代 C++ 设计**：采用 C++14 标准，利用 `std::thread`、`std::unique_ptr` 等特性，保证了代码的健壮性、异常安全性和易维护性。
+- **简洁易用的 API**：提供清晰的 `open`, `close`, `send`, `readData` 等接口，易于集成和使用。
+- **高度可配置**：支持自定义串口号、波特率、校验位、数据位、停止位、超时时间以及收发缓冲区大小。
 ## 环境要求
-    - **操作系统**: Windows
-    - **编译器**: 支持 C++14 的编译器 (例如 Visual Studio 2017 或更高版本)
+- **操作系统**: Windows
+- **编译器**: 支持 C++14 的编译器 (例如 Visual Studio 2017 或更高版本)
 ## 快速上手
-    将 `myserial.h` 和 `myserial.cpp` 添加到您的项目中即可开始使用。
-### 示例 1: 基本收发
-    此示例演示了如何打开串口，发送数据，并从内置的环形缓冲区中读取返回的数据。
+将 `myserial.h` 和 `myserial.cpp` 添加到您的项目中即可开始使用。
+### 示例 1: 基本收发,此示例演示了如何打开串口，发送数据，并从内置的环形缓冲区中读取返回的数据。
      // 示例1：使用环形缓冲区读取数据
     void example_usage1()
     {
@@ -48,7 +47,6 @@
     		}
     	}
     }
-
 ### 示例2：直接读取串口数据，绕过环形缓冲区
 
     void example_usage2()
@@ -79,8 +77,7 @@
     		Sleep(100); // 可根据实际情况调整延时
     	}
     }
-### 示例3：使用用户自定义环形缓冲区读取数据
-
+### 示例3：使用用户自定义环形缓冲区读取数据,在接收串口数据的同时，自动将8字节数据拼接在一起，存入用户自定义环形队列中。
     void example_usage3()
     {
     	MySerial serial;
@@ -131,24 +128,18 @@
     		Sleep(10);
     	}
     }
-
 ## API 参考
-
 ### 主要方法
-     - `bool open(const char* portName, int baudRate, ...)`: 打开并配置串口。
-     - `void close()`: 关闭串口，释放所有资源。
-     - `bool isOpen() const`: 检查串口是否已打开。
-     - `int send(const char* buffer, int size)`: 异步发送数据。
-     - `size_t readData(char* buffer, size_t size)`: 从内部环形缓冲区读取数据。
-     - `size_t getSize() const`: 获取环形缓冲区中可读数据的字节数。
-     - `bool hasData() const`: 检查环形缓冲区中是否有数据。
-
+ - `bool open(const char* portName, int baudRate, ...)`: 打开并配置串口。
+- `void close()`: 关闭串口，释放所有资源。
+- `bool isOpen() const`: 检查串口是否已打开。
+- `int send(const char* buffer, int size)`: 异步发送数据。
+- `size_t readData(char* buffer, size_t size)`: 从内部环形缓冲区读取数据。
+- `size_t getSize() const`: 获取环形缓冲区中可读数据的字节数。
+- `bool hasData() const`: 检查环形缓冲区中是否有数据。
 ### 高级配置
-     - `void setDataProcessFunc(const DataProcessFunc& func)`: 设置自定义数据处理回调函数。`DataProcessFunc` 的类型为 `std::function<void(const char* src, size_t src_size)>`。
-     - `bool setBufferSize(int size)`: 设置串口驱动程序的内部缓冲区大小。
-     - `void setReadTimeout(DWORD timeout)`: 设置读取操作的超时时间（毫秒）。
-     - `void setWriteTimeout(DWORD timeout)`: 设置写入操作的超时时间（毫秒）。
-
-## 贡献
-
+- `void setDataProcessFunc(const DataProcessFunc& func)`: 设置自定义数据处理回调函数。`DataProcessFunc` 的类型为 `std::function<void(const char* src, size_t src_size)>`。
+- `bool setBufferSize(int size)`: 设置串口驱动程序的内部缓冲区大小。
+- `void setReadTimeout(DWORD timeout)`: 设置读取操作的超时时间（毫秒）。
+- `void setWriteTimeout(DWORD timeout)`: 设置写入操作的超时时间（毫秒）。
 欢迎提交 Pull Request 或创建 Issue 来改进项目！
