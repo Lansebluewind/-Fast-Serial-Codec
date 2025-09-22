@@ -159,3 +159,6 @@
 - `void setWriteTimeout(DWORD timeout)`: 设置写入操作的超时时间（毫秒）。
 
 ## 欢迎提交 Pull Request 或创建 Issue 来改进项目！
+
+## 许可证
+该项目采用 [MIT License](LICENSE)。
