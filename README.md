@@ -79,7 +79,7 @@
     		Sleep(100); // 可根据实际情况调整延时
     	}
     }
-*** 示例3：使用用户自定义环形缓冲区读取数据
+### 示例3：使用用户自定义环形缓冲区读取数据
 
     void example_usage3()
     {
@@ -131,4 +131,24 @@
     		Sleep(10);
     	}
     }
-    
+
+## API 参考
+
+### 主要方法
+     - `bool open(const char* portName, int baudRate, ...)`: 打开并配置串口。
+     - `void close()`: 关闭串口，释放所有资源。
+     - `bool isOpen() const`: 检查串口是否已打开。
+     - `int send(const char* buffer, int size)`: 异步发送数据。
+     - `size_t readData(char* buffer, size_t size)`: 从内部环形缓冲区读取数据。
+     - `size_t getSize() const`: 获取环形缓冲区中可读数据的字节数。
+     - `bool hasData() const`: 检查环形缓冲区中是否有数据。
+
+### 高级配置
+     - `void setDataProcessFunc(const DataProcessFunc& func)`: 设置自定义数据处理回调函数。`DataProcessFunc` 的类型为 `std::function<void(const char* src, size_t src_size)>`。
+     - `bool setBufferSize(int size)`: 设置串口驱动程序的内部缓冲区大小。
+     - `void setReadTimeout(DWORD timeout)`: 设置读取操作的超时时间（毫秒）。
+     - `void setWriteTimeout(DWORD timeout)`: 设置写入操作的超时时间（毫秒）。
+
+## 贡献
+
+欢迎提交 Pull Request 或创建 Issue 来改进项目！
